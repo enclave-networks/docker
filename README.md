@@ -16,7 +16,7 @@ docker volume create enclave-id
 
 Second, license the container with an Enrolment key. We'll persist the Enclave profiles in that volume you created.
 
-> You will need an enrolment key from your Enclave account at https://portal.enclave.io.
+You will need an enrolment key from your Enclave account at https://portal.enclave.io.
 
 ```
 $ docker run -it \
@@ -25,8 +25,7 @@ $ docker run -it \
         license
 ```
 
-> If you want to run the docker container in a different place to where you enrol it, specify an explicit local path rather 
-> than a docker volume, and you can export the profile.
+If you want to run the docker container in a different place to where you enrol it, specify an explicit local path rather than a docker volume, and you can export the profile.
 
 Next, run enclave as a daemon:
 
