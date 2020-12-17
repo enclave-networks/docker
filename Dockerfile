@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y \
     iproute2
 
 # Helpers
-#RUN apt-get install net-tools nano iputils-ping
+# RUN apt-get install net-tools nano iputils-ping
 
 RUN update-ca-certificates
 
