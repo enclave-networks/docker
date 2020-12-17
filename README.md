@@ -1,5 +1,5 @@
 <p>
-    <a href="https://enclave.io/"><img src="https://enclave.io/img/enclave-header-logo.png"/></a>
+    <a href="https://enclave.io/"><img src="https://portal.enclave.io/images/enclave.png"/></a>
 </p>
 
 Official docker container containing the Enclave client.
