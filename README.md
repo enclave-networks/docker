@@ -68,7 +68,7 @@ Peer: discover.enclave.io
 
 ```
 
-You can create other containers that use the Enclave container's IP stack, meaning those containers can be accessed over Enclave:
+You can also configure other containers to share the IP stack of your Enclave container using the `--network` docker argument. By running new, or existing containers which share the IP stack of an enclave container, you can quickly and easilly expose those containers to other infrastructure connected to your Enclave container, without needing to map ports or change network configuration in your existing containers:
 
 ```bash
 $ docker run --name my-nginx \
