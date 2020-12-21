@@ -14,7 +14,7 @@ First, create a volume on the host to hold your enclave identity between restart
 docker volume create enclave-id
 ```
 
-Second, license the container with an Enrolment key. Enclave persists key material and profile data between container restarts in the volume you create. You will need a  enrolment key from your Enclave account https://portal.enclave.io.
+Second, license the container with an Enrolment key. Enclave persists key material and profile data between container restarts in the volume you create. You will need an  enrolment key from your Enclave account https://portal.enclave.io.
 
 ```
 $ docker run -it \
