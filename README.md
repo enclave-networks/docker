@@ -1,7 +1,5 @@
 # hub.docker.com/r/enclavenetworks/enclave
 
-<p><a href="https://enclave.io/"><img src="https://enclave.io/img/enclave-logo.png"/></a></p>
-
 [![Build Status](https://img.shields.io/docker/cloud/build/enclavenetworks/enclave.svg)](https://hub.docker.com/r/enclavenetworks/enclave)
 [![Docker Pulls](https://img.shields.io/docker/pulls/enclavenetworks/enclave.svg)](https://hub.docker.com/r/enclavenetworks/enclave)
 [![Docker Stars](https://img.shields.io/docker/stars/enclavenetworks/enclave.svg)](https://hub.docker.com/r/enclavenetworks/enclave)
