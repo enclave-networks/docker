@@ -1,12 +1,16 @@
-<p>
-    <a href="https://enclave.io/"><img src="https://portal.enclave.io/images/enclave.png"/></a>
-</p>
+# hub.docker.com/r/enclavenetworks/enclave
 
-Official docker container containing the Enclave client.
+<p><a href="https://enclave.io/"><img src="https://enclave.io/img/enclave-logo.png"/></a></p>
+
+[![Build Status](https://img.shields.io/docker/cloud/build/enclavenetworks/enclave.svg)](https://hub.docker.com/r/enclavenetworks/enclave)
+[![Docker Pulls](https://img.shields.io/docker/pulls/enclavenetworks/enclave.svg)](https://hub.docker.com/r/enclavenetworks/enclave)
+[![Docker Stars](https://img.shields.io/docker/stars/enclavenetworks/enclave.svg)](https://hub.docker.com/r/enclavenetworks/enclave)
+
+## Docker container for Enclave
 
 Check out https://enclave.io to start using Enclave to create secure networks.
 
-# How to use this image
+## How to use this image
 
 First, create a volume on the host to hold your enclave identity between restarts.
 
