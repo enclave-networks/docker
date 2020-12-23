@@ -4,6 +4,8 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/enclavenetworks/enclave.svg)](https://hub.docker.com/r/enclavenetworks/enclave)
 [![Docker Stars](https://img.shields.io/docker/stars/enclavenetworks/enclave.svg)](https://hub.docker.com/r/enclavenetworks/enclave)
 
+<p>&nbsp;</p>
+
 ## Docker container for Enclave
 
 Check out https://enclave.io to start using Enclave to create secure networks.
