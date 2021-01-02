@@ -36,14 +36,13 @@ Enclave persists configuration, key material and container identity between rest
 
 ### 3. Start the container with an Enrolment key
 
-Start the container using the `start` verb and passing an `--enrolment-key` command line argument in detached mode (`-d`).
+Start the container using the `start` verb and passing an `--enrolment-key` command line argument. Once Enclave is running you can detached from the container using the key combination `Ctrl-p` then `Ctrl-q`, or use `-d` with the `docker run` command to start the container directly in detached mode.
 
 ```
 $ sudo docker run -it \
                   --name enclave-container \
                   --cap-add NET_ADMIN \
                   --device /dev/net/tun \
-                  -d \
                   -v enclave-config:/etc/enclave/profiles \
                   -t enclavenetworks/enclave:latest \
                   start --enrolment-key XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
