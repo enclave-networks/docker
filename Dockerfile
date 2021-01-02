@@ -34,4 +34,4 @@ WORKDIR /usr/bin
 COPY --from=fetcher /tmp/enclave .
 RUN chmod +x /usr/bin/enclave
 
-ENTRYPOINT [ "enclave" ]
+ENTRYPOINT [ "enclave", "--interactive" ]
