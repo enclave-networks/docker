@@ -40,7 +40,7 @@ Run the container and set your Enrolment key as an environment variable using th
 
 ```
 $ sudo docker run -it \
-                  --name enclave-container \
+                  --name enclave-fabric \
                   --cap-add NET_ADMIN \
                   --device /dev/net/tun \
                   -e ENCLAVE_ENROLMENT_KEY='XXXXX-XXXXX-XXXXX-XXXXX-XXXXX' \
@@ -53,12 +53,12 @@ Enrolment keys can also be injected into the container as command line arguments
 **Note**: Running Enclave inside a docker container requires more than just basic privileges. Specifically, you
 must provide the `--cap-add NET_ADMIN` and `--device /dev/net/tun` options for Enclave to create a tap device inside the container.
 
-If your container stops, restart it using `sudo docker restart enclave-container`.
+If your container stops, restart it using `sudo docker restart enclave-fabric`.
 
 ### 3. Run commands against enclave from outside the container with `docker exec`.
 
 ```
-$ sudo docker exec enclave-container enclave status
+$ sudo docker exec enclave-fabric enclave status
 
 Local identity: R899Q
 
@@ -88,6 +88,6 @@ You can also configure other containers to share the IP stack of your Enclave co
 
 ```bash
 $ sudo docker run --name my-nginx \
-             --network="container:enclave-container" 
+             --network="container:enclave-fabric" 
              -d nginx
 ```
