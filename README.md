@@ -10,14 +10,6 @@
 
 Check out https://enclave.io to start using Enclave to create secure networks.
 
-## Test Enclave
-
-Test that you can obtain and run the Enclave docker container by creating a container to print the Enclave version number. The `--rm` flag instructs Docker to automatically clean up the container and remove the file system when the container exits flag.
-
-```
-$ sudo docker run --rm -t enclavenetworks/enclave:latest version
-```
-
 ## How to use this image
 
 ### 1. Create an Enclave account
