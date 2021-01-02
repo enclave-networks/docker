@@ -44,7 +44,7 @@ $ sudo docker run -it \
                   --cap-add NET_ADMIN \
                   --device /dev/net/tun \
                   -e ENCLAVE_ENROLMENT_KEY='XXXXX-XXXXX-XXXXX-XXXXX-XXXXX' \
-                  -v enclave-id:/etc/enclave/profiles \
+                  -v enclave-config:/etc/enclave/profiles \
                   -t enclavenetworks/enclave:latest
 ```
 
