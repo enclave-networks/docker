@@ -8,11 +8,11 @@
 
 ## How to use this image
 
-### 1. Create an Enclave account
+#### 1. Create an Enclave account
 
 Visit https://enclave.io to create an account. You'll need to get an enrolment key from the [portal](https://portal.enclave.io) once you're signed in.
 
-### 2. Create a persistent data store
+#### 2. Create a persistent data store
 
 Create a docker volume on the host to persist Enclave configuration data and container identity between restarts. 
 
@@ -22,7 +22,7 @@ $ sudo docker volume create enclave-config
 
 Enclave persists configuration, key material and container identity between restarts in the docker volume you create. If you need to run your Enclave container from another system, specify an explicit local path for `/etc/enclave/profiles` instead of a docker volume, and you can export the profile.
 
-### 3. Start the container with an Enrolment key
+#### 3. Start the container with an Enrolment key
 
 Run the container and set your Enrolment key as an environment variable using the `-e` flag (`$ENCLAVE_ENROLMENT_KEY`). Once Enclave is running you can detached from the container using the `Ctrl-p` then `Ctrl-q`, or use `-d` with `docker run` to start the container directly in detached mode.
 
@@ -43,7 +43,7 @@ must provide the `--cap-add NET_ADMIN` and `--device /dev/net/tun` options for E
 
 If your container stops, restart it using `sudo docker restart enclave-fabric`.
 
-### 3. Run commands against enclave from outside the container with `docker exec`.
+#### 4. Run commands against enclave from outside the container with `docker exec`.
 
 ```
 $ sudo docker exec enclave-fabric enclave status
