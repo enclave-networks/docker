@@ -36,19 +36,19 @@ Enclave persists configuration, key material and container identity between rest
 
 ### 3. Start the container with an Enrolment key
 
-Start the container using the `start` verb and passing an `--enrolment-key` command line argument. Once Enclave is running you can detached from the container using the key combination `Ctrl-p` then `Ctrl-q`, or use `-d` with the `docker run` command to start the container directly in detached mode.
+Run the container and set your Enrolment key as an environment variable using the `-e` flag (`$ENCLAVE_ENROLMENT_KEY`). Once Enclave is running you can detached from the container using the `Ctrl-p` then `Ctrl-q`, or use `-d` with `docker run` to start the container directly in detached mode.
 
 ```
 $ sudo docker run -it \
                   --name enclave-container \
                   --cap-add NET_ADMIN \
                   --device /dev/net/tun \
-                  -v enclave-config:/etc/enclave/profiles \
-                  -t enclavenetworks/enclave:latest \
-                  start --enrolment-key XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
+                  -e ENCLAVE_ENROLMENT_KEY='XXXXX-XXXXX-XXXXX-XXXXX-XXXXX' \
+                  -v enclave-id:/etc/enclave/profiles \
+                  -t enclavenetworks/enclave:latest
 ```
 
-Enrolment keys can also be injected into the container as environment variables using `-e ENCLAVE_ENROLMENT_KEY='XXXXX-XXXXX-XXXXX-XXXXX-XXXXX'`.
+Enrolment keys can also be injected into the container as command line arguments, `start --enrolment-key XXXXX-XXXXX-XXXXX-XXXXX-XXXXX`.
 
 **Note**: Running Enclave inside a docker container requires more than just basic privileges. Specifically, you
 must provide the `--cap-add NET_ADMIN` and `--device /dev/net/tun` options for Enclave to create a tap device inside the container.
