@@ -6,7 +6,35 @@
 
 <p>&nbsp;</p>
 
-## How to use this image
+## Running Enclave with Docker Compose
+
+1. Download our [docker-compose.yml](https://raw.githubusercontent.com/enclave-networks/container.enclave/main/docker-compose.yml) file.
+
+```
+$ wget https://raw.githubusercontent.com/enclave-networks/container.enclave/main/docker-compose.yml
+```
+
+2. Set the value of `ENCLAVE_ENROLMENT_KEY` in the `docker-compose.yml` file. Visit https://enclave.io to create an account. You can get an enrolment key from the [portal](https://portal.enclave.io) once you're signed in.
+
+3. Bring the container up.
+
+```
+$ sudo docker-compose up -d
+```
+
+4. Check the container is up. Make a note of your `Local identity`, you'll need to share this with other systems which you want to connect to.
+
+```
+$ sudo docker exec enclave-fabric enclave status
+```
+
+5. Let's say you want to build a connect to another system running Enclave whose Identity is `3RWWG`. Use `docker exec` to authorise a connection to that system.
+
+```
+$ sudo docker exec enclave-fabric enclave add 3RWWG
+```
+
+## Running Enclave Manually
 
 #### 1. Create an Enclave account
 
@@ -70,7 +98,7 @@ Peer: discover.enclave.io
    Endpoint. . . . . . : Tcp/161.35.171.235:443
 ```
 
-## Configure other containers to use the Enclave network
+## Configure other containers to share the Enclave network
 
 You can also configure other containers to share the IP stack of your Enclave container using the `--network` docker argument. By running new, or existing containers which share the IP stack of an enclave container, you can quickly and easilly expose those containers to other infrastructure connected to your Enclave container, without needing to map ports or change network configuration:
 
