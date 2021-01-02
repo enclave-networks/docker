@@ -53,6 +53,8 @@ Enrolment keys can also be injected into the container as command line arguments
 **Note**: Running Enclave inside a docker container requires more than just basic privileges. Specifically, you
 must provide the `--cap-add NET_ADMIN` and `--device /dev/net/tun` options for Enclave to create a tap device inside the container.
 
+If your container stops, restart it using `sudo docker restart enclave-container`.
+
 ### 3. Run commands against enclave from outside the container with `docker exec`.
 
 ```
