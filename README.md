@@ -6,10 +6,6 @@
 
 <p>&nbsp;</p>
 
-## Docker container for Enclave
-
-Check out https://enclave.io to start using Enclave to create secure networks.
-
 ## How to use this image
 
 ### 1. Create an Enclave account
