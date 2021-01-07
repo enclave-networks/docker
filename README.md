@@ -134,7 +134,7 @@ $ sudo docker run --name my-nginx \
 
 ## Create a "dirty" working container
 
-Create a "dirty" working container which shares the same network stack as your enclave container and access connected hosts.
+Create a "dirty" working container which shares the same network stack as your enclave container which can also communicate with connected peers.
 
 ```
 docker run -it --rm --network="container:fabric" ubuntu:20.04
