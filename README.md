@@ -19,19 +19,19 @@ $ wget https://raw.githubusercontent.com/enclave-networks/container.enclave/main
 3. Bring the container up.
 
 ```
-$ sudo docker-compose up -d
+$ docker-compose up -d
 ```
 
 4. Check the container is up. Make a note of your `Local identity`, you'll need to share this with other systems which you want to connect to.
 
 ```
-$ sudo docker exec enclave-fabric enclave status
+$ docker exec fabric enclave status
 ```
 
 5. Let's say you want to build a connect to another system running Enclave whose Identity is `3RWWG`. Use `docker exec` to authorise a connection to that system.
 
 ```
-$ sudo docker exec enclave-fabric enclave add 3RWWG
+$ docker exec fabric enclave add 3RWWG
 ```
 
 ## Running Enclave Manually
@@ -45,7 +45,7 @@ Visit https://enclave.io to create an account. You'll need to get an enrolment k
 Create a docker volume on the host to persist Enclave configuration data and container identity between restarts. 
 
 ```bash
-$ sudo docker volume create enclave-config
+$ docker volume create enclave-config
 ```
 
 Enclave persists configuration, key material and container identity between restarts in the docker volume you create. If you need to run your Enclave container from another system, specify an explicit local path for `/etc/enclave/profiles` instead of a docker volume, and you can export the profile.
@@ -55,8 +55,8 @@ Enclave persists configuration, key material and container identity between rest
 Run the container and set your Enrolment key as an environment variable using the `-e` flag (`$ENCLAVE_ENROLMENT_KEY`). Once Enclave is running you can detached from the container using the `Ctrl-p` then `Ctrl-q`, or use `-d` with `docker run` to start the container directly in detached mode.
 
 ```
-$ sudo docker run -it \
-                  --name enclave-fabric \
+$ docker run -it \
+                  --name fabric \
                   --cap-add NET_ADMIN \
                   --device /dev/net/tun \
                   -e ENCLAVE_ENROLMENT_KEY='XXXXX-XXXXX-XXXXX-XXXXX-XXXXX' \
@@ -69,12 +69,12 @@ Enrolment keys can also be injected into the container as command line arguments
 **Note**: Running Enclave inside a docker container requires more than just basic privileges. Specifically, you
 must provide the `--cap-add NET_ADMIN` and `--device /dev/net/tun` options for Enclave to create a tap device inside the container.
 
-If your container stops, restart it using `sudo docker restart enclave-fabric`.
+If your container stops, restart it using `docker restart fabric`.
 
 #### 4. Run commands against enclave from outside the container with `docker exec`.
 
 ```
-$ sudo docker exec enclave-fabric enclave status
+$ docker exec fabric enclave status
 
 Local identity: R899Q
 
@@ -98,12 +98,50 @@ Peer: discover.enclave.io
    Endpoint. . . . . . : Tcp/161.35.171.235:443
 ```
 
+Authorise connections to the systems you need to reach (and make sure those systems have authorised your Local Identity in return).
+
+```
+$ docker exec fabric enclave add 8H62G -d "teamcity"
+$ docker exec fabric enclave add Q8V28 -d "raspberry pi"
+$ docker exec fabric enclave add 7L5GY -d "sarah laptop"
+$ docker exec fabric enclave add 4Y66W -d "mongodb-nyc-1"
+$ docker exec fabric enclave add Y7339 -d "mongodb-nyc-2"
+$ docker exec fabric enclave add 968G2 -d "mongodb-lon-3"
+```
+
+ Add your configured **Virtual address** (in this example `100.110.213.200`) as a DNS server to your docker container to be able to resolve system names. Print the contents of /etc/resolv.conf to verify the change and install the `ping` utility to verify peers are accessible by hostname.
+ 
+ ```
+$ docker exec fabric cat /etc/resolv.conf
+nameserver 100.82.99.37
+nameserver 8.8.8.8
+$ docker exec fabric apt-get update && apt-get install -t iputils-ping 
+$ docker exec fabric ping teamcity.enclave
+PING teamcity.enclave (100.73.136.78) 56(84) bytes of data.
+64 bytes from 100.73.136.78 (100.73.136.78): icmp_seq=1 ttl=128 time=17.4 ms
+64 bytes from 100.73.136.78 (100.73.136.78): icmp_seq=2 ttl=128 time=13.9 ms
+```
+
 ## Configure other containers to share the Enclave network
 
 You can also configure other containers to share the IP stack of your Enclave container using the `--network` docker argument. By running new, or existing containers which share the IP stack of an enclave container, you can quickly and easilly expose those containers to other infrastructure connected to your Enclave container, without needing to map ports or change network configuration:
 
 ```bash
 $ sudo docker run --name my-nginx \
-             --network="container:enclave-fabric" 
+             --network="container:fabric" 
              -d nginx
 ```
+
+## Create a "dirty" working container
+
+Create a "dirty" working container which shares the same network stack as your enclave container and access connected hosts.
+
+```
+docker run -it --rm --network="container:fabric" ubuntu:20.04
+root@74f19fa990b1:/# apt-get update && apt-get install -y net-tools nano iputils-ping
+root@74f19fa990b1:/# ping teamcity.enclave
+PING teamcity.enclave (100.73.136.78) 56(84) bytes of data.
+64 bytes from 100.73.136.78 (100.73.136.78): icmp_seq=1 ttl=128 time=17.4 ms
+64 bytes from 100.73.136.78 (100.73.136.78): icmp_seq=2 ttl=128 time=13.9 ms
+```
+
