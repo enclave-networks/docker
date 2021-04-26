@@ -1,6 +1,6 @@
 FROM ubuntu:focal AS fetcher
 
-ARG channel=RC
+ARG channel=GA
 
 # Setup apt for noninteractive mode
 ENV DEBIAN_FRONTEND=noninteractive
