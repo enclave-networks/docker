@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     iproute2 \
     libc6 \
     libgssapi-krb5-2 \
-    libicu67 \
+    libicu66 \
     libssl1.1 \
     openssl \
     zlib1g \
