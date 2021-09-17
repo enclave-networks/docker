@@ -22,9 +22,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     iproute2 \
     libc6 \
+    libgcc1 \
     libgssapi-krb5-2 \
     libicu66 \
     libssl1.1 \
+    libstdc++6 \
     openssl \
     zlib1g \
  && apt-get clean \
