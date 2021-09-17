@@ -19,13 +19,14 @@ FROM ubuntu:focal
 
 # Dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libicu66 \
-    libssl1.1 \
-    zlib1g \
-    libc6 \
-    openssl \
     ca-certificates \
     iproute2 \
+    libc6 \
+    libgssapi-krb5-2 \
+    libicu67 \
+    libssl1.1 \
+    openssl \
+    zlib1g \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
