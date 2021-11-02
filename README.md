@@ -14,7 +14,7 @@
 $ wget https://raw.githubusercontent.com/enclave-networks/container.enclave/main/docker-compose.yml
 ```
 
-2. Set the value of `ENCLAVE_ENROLMENT_KEY` in the `docker-compose.yml` file. Visit https://enclave.io to create an account. You can get an enrolment key from the [portal](https://portal.enclave.io) once you're signed in.
+2. Set the value of `ENCLAVE_ENROLMENT_KEY` in the `docker-compose.yml` file to an Ephemeral Enrolment Key. Visit https://enclave.io to create an account. You can get an Ephemeral Enrolment Key from the [portal](https://portal.enclave.io) once you're signed in.  
 
 3. Bring the container up.
 
@@ -22,35 +22,21 @@ $ wget https://raw.githubusercontent.com/enclave-networks/container.enclave/main
 $ docker-compose up -d
 ```
 
-4. Check the container is up. Make a note of your `Local identity`, you'll need to share this with other systems which you want to connect to.
+4. Check the container is up. Once it is running, the System will be available in the Enclave Portal for you to configure and define policy for.
 
 ```
 $ docker exec fabric enclave status
-```
-
-5. Let's say you want to build a connect to another system running Enclave whose Identity is `3RWWG`. Use `docker exec` to authorise a connection to that system.
-
-```
-$ docker exec fabric enclave add 3RWWG
 ```
 
 ## Running Enclave Manually
 
 #### 1. Create an Enclave account
 
-Visit https://enclave.io to create an account. You'll need to get an enrolment key from the [portal](https://portal.enclave.io) once you're signed in.
+Visit https://enclave.io to create an account. You'll need to get an Ephemeral Enrolment Key from the [portal](https://portal.enclave.io) once you're signed in.
 
-#### 2. Create a persistent data store
+#### 2. Create 
 
-Create a docker volume on the host to persist Enclave configuration data and container identity between restarts. 
-
-```bash
-$ docker volume create enclave-config
-```
-
-Enclave persists configuration, key material and container identity between restarts in the docker volume you create. If you need to run your Enclave container from another system, specify an explicit local path for `/etc/enclave/profiles` instead of a docker volume, and you can export the profile.
-
-#### 3. Start the container with an Enrolment key
+#### 2. Start the container with an Enrolment key
 
 Run the container and set your Enrolment key as an environment variable using the `-e` flag (`$ENCLAVE_ENROLMENT_KEY`). Once Enclave is running you can detached from the container using the `Ctrl-p` then `Ctrl-q`, or use `-d` with `docker run` to start the container directly in detached mode.
 
@@ -60,7 +46,6 @@ $ docker run -it \
                   --cap-add NET_ADMIN \
                   --device /dev/net/tun \
                   -e ENCLAVE_ENROLMENT_KEY='XXXXX-XXXXX-XXXXX-XXXXX-XXXXX' \
-                  -v enclave-config:/etc/enclave/profiles \
                   -t enclavenetworks/enclave:latest
 ```
 
@@ -71,7 +56,7 @@ must provide the `--cap-add NET_ADMIN` and `--device /dev/net/tun` options for E
 
 If your container stops, restart it using `docker restart fabric`.
 
-#### 4. Run commands against enclave from outside the container with `docker exec`.
+#### 3. Run commands against enclave from outside the container with `docker exec`.
 
 ```
 $ docker exec fabric enclave status
