@@ -21,6 +21,7 @@ FROM ubuntu:focal
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     iproute2 \
+    iptables \
     libc6 \
     libgcc1 \
     libgssapi-krb5-2 \
